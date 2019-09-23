@@ -23,7 +23,9 @@ if os == 1:
     files = open('./linux_paths.txt')
     while(True):
       line = files.readline()
-      r = requests.get(urlpath+payload+files)
+      line = line.replace('\n','')
+      r = requests.get(urlpath+payload+line)
+      print (r.url)
       print (r.status_code)
       if r.status_code == 200:
           name = line.replace("/","-")
